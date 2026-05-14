@@ -2939,7 +2939,7 @@ function tagsFor(site) {
 }
 
 function imageLabel(site) {
-  return site.image ? "" : t("pendingPhoto");
+  return imageSrc(site) ? "" : t("pendingPhoto");
 }
 
 function fallbackBackground(site) {
@@ -2981,9 +2981,10 @@ function imageMarkup(site, className) {
 }
 
 function setImageElement(element, site) {
+  const image = imageSrc(site);
   element.style = fallbackBackground(site);
   element.innerHTML = `
-    ${site.image ? `<img src="${imageSrc(site)}" alt="${site.name}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.nextElementSibling.textContent='${t("unavailableImage")}'; this.remove()" />` : ""}
+    ${image ? `<img src="${image}" alt="${site.name}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.nextElementSibling.textContent='${t("unavailableImage")}'; this.remove()" />` : ""}
     <span class="image-fallback-label">${imageLabel(site)}</span>
   `;
 }
