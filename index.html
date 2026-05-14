@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>El orden de la arquitectura | Atlas interactivo</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <aside class="sidebar" aria-label="Panel de exploracion">
+        <header class="brand">
+          <div class="brand-banner-frame">
+            <img class="brand-banner" src="assets/brand/banner-02.jpg" alt="El orden de la arquitectura" />
+          </div>
+          <div class="language-toggle" aria-label="Idioma">
+            <button class="language-button active" type="button" data-lang="es">ES</button>
+            <button class="language-button" type="button" data-lang="en">EN</button>
+          </div>
+          <h1 data-i18n="brandTitle">Atlas arquitectónico</h1>
+          <p class="intro" data-i18n="intro">
+            Explora los lugares donde la arquitectura empezo a convertirse en memoria, poder,
+            ritual y ciudad.
+          </p>
+        </header>
+
+        <section class="controls" aria-label="Filtros">
+          <label class="search-label" for="searchInput" data-i18n="searchLabel">Buscar sitio</label>
+          <input id="searchInput" type="search" placeholder="Ej. Stonehenge, Ur, Karnak" />
+
+          <label class="video-toggle">
+            <input id="videoOnlyToggle" type="checkbox" />
+            <span data-i18n="videoOnly">Mostrar solo sitios con video</span>
+          </label>
+
+
+          <div class="filter-group" aria-label="Periodo">
+            <button class="filter-button active" type="button" data-filter="all" data-i18n="filterAll">Todos</button>
+            <button class="filter-button" type="button" data-filter="Neolitico" data-period-label="Neolitico">Neolitico</button>
+            <button class="filter-button" type="button" data-filter="Egipto" data-period-label="Egipto">Egipto</button>
+            <button class="filter-button" type="button" data-filter="Mesopotamia" data-period-label="Mesopotamia">Mesopotamia</button>
+            <button class="filter-button" type="button" data-filter="Egeo" data-period-label="Egeo">Egeo</button>
+            <button class="filter-button" type="button" data-filter="Grecia" data-period-label="Grecia">Grecia</button>
+            <button class="filter-button" type="button" data-filter="Roma" data-period-label="Roma">Roma</button>
+          </div>
+        </section>
+
+        <section class="time-control" aria-label="Filtro por fecha">
+          <div class="time-heading">
+            <span data-i18n="maxDate">Fecha maxima</span>
+            <strong id="yearLabel">100 d. C.</strong>
+          </div>
+          <input id="yearRange" type="range" min="-10000" max="500" value="500" step="100" />
+          <div class="time-scale">
+            <span id="timeStartLabel">10000 a. C.</span>
+            <span id="timeEndLabel">500 d. C.</span>
+          </div>
+        </section>
+
+        <section class="site-list" aria-label="Sitios disponibles">
+          <div class="list-heading">
+            <h2 data-i18n="sitesTitle">Sitios</h2>
+            <span id="resultCount">0</span>
+          </div>
+          <div id="siteStats" class="site-stats"></div>
+          <div id="siteList" class="cards"></div>
+        </section>
+      </aside>
+
+      <section class="map-area">
+        <div id="map" aria-label="Mapa interactivo"></div>
+        <article id="detailPanel" class="detail-panel is-hidden">
+          <div class="detail-topline">
+            <span id="detailEra">Selecciona un sitio</span>
+            <button id="closeDetail" type="button" aria-label="Cerrar ficha" data-i18n-aria="closeCard">x</button>
+          </div>
+          <figure class="detail-image" id="detailImage" aria-label="Imagen del sitio seleccionado"></figure>
+          <h2 id="detailTitle">Empieza por un punto del mapa</h2>
+          <p id="detailMeta">O usa los filtros para recorrer la historia por periodos.</p>
+          <p id="detailVideoStatus" class="video-status">Video pendiente</p>
+          <p id="detailDescription">
+            Esta maqueta puede crecer hacia fichas premium, rutas de aprendizaje y guias
+            descargables para monetizar tu canal.
+          </p>
+          <dl class="detail-facts">
+            <div>
+              <dt data-i18n="whyItMatters">Por que importa</dt>
+              <dd id="detailImportance">Convierte tus videos en una experiencia navegable.</dd>
+            </div>
+            <div>
+              <dt data-i18n="premiumModel">Modelo premium</dt>
+              <dd id="detailPremium">Fichas extendidas, imagenes comparativas y rutas tematicas.</dd>
+            </div>
+          </dl>
+          <div class="detail-actions">
+            <button id="openFullFicha" type="button" data-i18n="openFullCard">Ver ficha completa</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <aside id="fullFicha" class="full-ficha is-hidden" aria-label="Ficha completa" data-i18n-aria="fullCard">
+      <div class="full-ficha-backdrop" id="closeFullBackdrop"></div>
+      <article class="full-ficha-panel">
+        <div class="full-ficha-header">
+          <div>
+            <p id="fullFichaEra" class="eyebrow">Ficha completa</p>
+            <h2 id="fullFichaTitle">Sitio</h2>
+          </div>
+          <button id="closeFullFicha" type="button" aria-label="Cerrar ficha completa" data-i18n-aria="closeFullCard">x</button>
+        </div>
+        <figure id="fullFichaImage" class="full-ficha-image"></figure>
+        <div class="full-ficha-grid">
+          <section>
+            <h3 data-i18n="historicalReading">Lectura historica</h3>
+            <p id="fullFichaDescription"></p>
+          </section>
+          <section>
+            <h3 data-i18n="whyItMatters">Por que importa</h3>
+            <p id="fullFichaImportance"></p>
+          </section>
+          <section>
+            <h3 data-i18n="geolocatedVideo">Video geolocalizado</h3>
+            <p id="fullFichaVideo"></p>
+          </section>
+          <section>
+            <h3 data-i18n="premiumMaterial">Material premium</h3>
+            <p id="fullFichaPremium"></p>
+          </section>
+        </div>
+      </article>
+    </aside>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

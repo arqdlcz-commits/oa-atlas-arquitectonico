@@ -1,0 +1,867 @@
+const sites = [
+  {
+    name: "Gobekli Tepe",
+    period: "Neolitico",
+    date: "c. 9600-8200 a. C.",
+    year: -9600,
+    place: "Sanliurfa, Turquia",
+    coords: [37.2231, 38.9225],
+    culture: "Comunidades neoliticas preceramicas",
+    description:
+      "Un conjunto de recintos con pilares monumentales tallados antes de la agricultura plenamente establecida. Cambia la pregunta clasica: no solo la ciudad produce arquitectura monumental; el ritual tambien pudo impulsarla.",
+    importance:
+      "Es una de las evidencias mas potentes de arquitectura ritual temprana y organizacion colectiva antes de los estados.",
+    premium: "Comparativa con Karahan Tepe, diagramas de planta y ruta sobre arquitectura ritual temprana.",
+  },
+  {
+    name: "Jerico",
+    period: "Neolitico",
+    date: "c. 8000 a. C.",
+    year: -8000,
+    place: "Cisjordania",
+    coords: [31.8711, 35.4444],
+    culture: "Neolitico preceramico",
+    description:
+      "Uno de los asentamientos mas antiguos con estructuras defensivas tempranas, incluida una torre de piedra que sugiere trabajo coordinado y vida sedentaria.",
+    importance:
+      "Permite explicar el salto entre refugio, asentamiento estable y arquitectura comunitaria.",
+    premium: "Ficha extendida sobre murallas, torre y debates sobre defensa, agua y simbolismo.",
+  },
+  {
+    name: "Catalhoyuk",
+    period: "Neolitico",
+    date: "c. 7400-6200 a. C.",
+    year: -7400,
+    place: "Anatolia central, Turquia",
+    coords: [37.668, 32.826],
+    culture: "Aldea neolitica",
+    description:
+      "Un asentamiento denso de casas adosadas, accesos por cubierta y espacios domesticos cargados de pintura, entierros y memoria familiar.",
+    importance:
+      "Ayuda a mostrar que la arquitectura domestica tambien es historia social, ritual y urbana en germen.",
+    premium: "Recorrido por vivienda, cubierta, pintura mural y vida cotidiana.",
+  },
+  {
+    name: "Skara Brae",
+    period: "Neolitico",
+    date: "c. 3180-2500 a. C.",
+    year: -3180,
+    place: "Orkney, Escocia",
+    coords: [59.0486, -3.3431],
+    culture: "Neolitico britanico",
+    description:
+      "Una aldea de piedra excepcionalmente conservada, con viviendas semienterradas, mobiliario fijo y pasajes protegidos del clima.",
+    importance:
+      "Hace visible la arquitectura como adaptacion al paisaje, al frio y a la vida comunal.",
+    premium: "Plano comentado de viviendas y conexion con otros monumentos de Orkney.",
+  },
+  {
+    name: "Newgrange",
+    period: "Neolitico",
+    date: "c. 3200 a. C.",
+    year: -3200,
+    place: "Valle del Boyne, Irlanda",
+    coords: [53.6947, -6.4755],
+    culture: "Neolitico atlantico",
+    description:
+      "Un gran tumulo con corredor interior alineado con el amanecer del solsticio de invierno. Su arquitectura une muerte, calendario y paisaje.",
+    importance:
+      "Sirve para explicar la precision astronomica como parte del diseno arquitectonico antiguo.",
+    premium: "Animacion de alineacion solar y glosario de arquitectura megalitica.",
+  },
+  {
+    name: "Stonehenge",
+    period: "Neolitico",
+    date: "c. 3000-2000 a. C.",
+    year: -3000,
+    place: "Wiltshire, Inglaterra",
+    coords: [51.1789, -1.8262],
+    culture: "Neolitico y Edad del Bronce",
+    description:
+      "Un paisaje ceremonial construido durante siglos, famoso por sus trilitos y alineaciones solares.",
+    importance:
+      "Resume la arquitectura como proceso: cantera, transporte, ceremonia, astronomia y memoria colectiva.",
+    premium: "Capas cronologicas del sitio y ruta por el paisaje ritual de Salisbury.",
+  },
+  {
+    name: "Zigurat de Ur",
+    period: "Mesopotamia",
+    date: "c. 2100 a. C.",
+    year: -2100,
+    place: "Nasiriya, Irak",
+    coords: [30.9625, 46.1031],
+    culture: "Sumeria",
+    description:
+      "Una plataforma escalonada dedicada al dios lunar Nanna, levantada con ladrillo en una ciudad donde templo, administracion y poder estaban conectados.",
+    importance:
+      "Muestra el nacimiento de la arquitectura monumental urbana ligada al templo y al Estado.",
+    premium: "Reconstruccion por niveles, materiales y comparacion con otros zigurats.",
+  },
+  {
+    name: "Babilonia",
+    period: "Mesopotamia",
+    date: "c. siglo VI a. C.",
+    year: -600,
+    place: "Hillah, Irak",
+    coords: [32.5364, 44.4208],
+    culture: "Neobabilonica",
+    description:
+      "Capital imperial asociada a murallas, puertas ceremoniales y grandes ejes procesionales. La ciudad se convierte en escenario politico y religioso.",
+    importance:
+      "Permite hablar de urbanismo, representacion del poder y arquitectura como propaganda.",
+    premium: "Ruta de la Puerta de Ishtar, via procesional y palacios de Nabucodonosor II.",
+  },
+  {
+    name: "Pirámide escalonada de Zoser",
+    period: "Egipto",
+    date: "c. 2630 a. C.",
+    year: -2630,
+    place: "Saqqara, Egipto",
+    coords: [29.8713, 31.2165],
+    culture: "Imperio Antiguo",
+    description:
+      "El complejo funerario atribuido a Imhotep transforma la mastaba en una forma monumental escalonada de piedra.",
+    importance:
+      "Marca un salto tecnico y simbolico en la arquitectura funeraria egipcia.",
+    premium: "Plano del complejo, mastaba vs piramide y papel de Imhotep.",
+  },
+  {
+    name: "Pirámides de Guiza",
+    period: "Egipto",
+    date: "c. 2580-2500 a. C.",
+    year: -2580,
+    place: "Guiza, Egipto",
+    coords: [29.9792, 31.1342],
+    culture: "Imperio Antiguo",
+    description:
+      "Un paisaje funerario de escala extraordinaria donde geometria, orientacion y poder real se unen en piedra.",
+    importance:
+      "Es el ejemplo clasico para explicar arquitectura, Estado, trabajo colectivo y eternidad.",
+    premium: "Ficha comparativa de Keops, Kefren y Micerino con medidas, camaras y calzadas.",
+  },
+  {
+    name: "Templo de Karnak",
+    period: "Egipto",
+    date: "c. 2000-300 a. C.",
+    year: -2000,
+    place: "Luxor, Egipto",
+    coords: [25.7188, 32.6573],
+    culture: "Egipto faraonico",
+    description:
+      "Un enorme conjunto templario ampliado por generaciones de faraones. Su sala hipostila convierte columnas, sombra y escala en experiencia religiosa.",
+    importance:
+      "Perfecto para explicar arquitectura acumulativa: cada gobernante deja una capa de poder.",
+    premium: "Ruta por pilonos, obeliscos, sala hipostila y eje procesional.",
+  },
+  {
+    name: "Abu Simbel",
+    period: "Egipto",
+    date: "c. 1264 a. C.",
+    year: -1264,
+    place: "Nubia, Egipto",
+    coords: [22.3372, 31.6258],
+    culture: "Imperio Nuevo",
+    description:
+      "Templos excavados en la roca durante el reinado de Ramses II, con fachada colosal y efectos solares en el santuario.",
+    importance:
+      "Une arquitectura, paisaje, imagen real y control territorial en una frontera imperial.",
+    premium: "Analisis de fachada, santuario, alineacion solar y traslado moderno del templo.",
+  },
+  {
+    name: "Palacio de Cnosos",
+    period: "Egeo",
+    date: "c. 1900-1450 a. C.",
+    year: -1900,
+    place: "Creta, Grecia",
+    coords: [35.2986, 25.1631],
+    culture: "Minoica",
+    description:
+      "Un complejo palacial con patios, almacenes, escaleras y pintura mural. Es arquitectura de administracion, ceremonia y vida cortesana.",
+    importance:
+      "Introduce el mundo egeo antes de Grecia clasica y la idea del palacio como red economica.",
+    premium: "Mapa por sectores y debate sobre restauraciones de Arthur Evans.",
+  },
+  {
+    name: "Micenas",
+    period: "Egeo",
+    date: "c. 1350-1200 a. C.",
+    year: -1350,
+    place: "Argolida, Grecia",
+    coords: [37.7308, 22.7561],
+    culture: "Micenica",
+    description:
+      "Ciudadela fortificada con muros ciclopeos, puerta monumental y tumbas reales. La arquitectura se vuelve defensa, linaje y dominio.",
+    importance:
+      "Ayuda a conectar palacio, guerra y memoria heroica antes de la polis griega.",
+    premium: "Ficha de Puerta de los Leones, megaron y tesoro de Atreo.",
+  },
+  {
+    name: "Partenon",
+    period: "Grecia",
+    date: "447-432 a. C.",
+    year: -447,
+    place: "Atenas, Grecia",
+    coords: [37.9715, 23.7267],
+    culture: "Grecia clasica",
+    description:
+      "Templo dorico dedicado a Atenea, construido en la Acropolis durante el programa de Pericles.",
+    importance:
+      "Es clave para explicar orden clasico, proporcion, ciudadania, imperio ateniense y memoria occidental.",
+    premium: "Modulo sobre ordenes, correcciones opticas y programa escultorico.",
+  },
+  {
+    name: "Teatro de Epidauro",
+    period: "Grecia",
+    date: "c. siglo IV a. C.",
+    year: -400,
+    place: "Epidauro, Grecia",
+    coords: [37.5964, 23.0794],
+    culture: "Grecia clasica",
+    description:
+      "Teatro integrado en una ladera, celebre por su geometria y relacion entre cuerpo, voz y paisaje.",
+    importance:
+      "Muestra que la arquitectura griega no fue solo templo: tambien fue experiencia civica y performativa.",
+    premium: "Diagrama de cavea, orchestra, escena y acustica.",
+  },
+  {
+    name: "Coliseo",
+    period: "Roma",
+    date: "70-80 d. C.",
+    year: 70,
+    place: "Roma, Italia",
+    coords: [41.8902, 12.4922],
+    culture: "Imperio romano",
+    description:
+      "Anfiteatro monumental para espectaculos publicos, con sistema de circulacion, gradas, arcos y bovedas.",
+    importance:
+      "Resume la arquitectura romana como tecnologia de masas, control social e ingenieria espacial.",
+    premium: "Corte por niveles, vomitorios, estructura y logica del espectaculo.",
+  },
+  {
+    name: "Panteon de Roma",
+    period: "Roma",
+    date: "c. 125 d. C.",
+    year: 125,
+    place: "Roma, Italia",
+    coords: [41.8986, 12.4769],
+    culture: "Imperio romano",
+    description:
+      "Un templo con portico clasico y una rotonda cubierta por una cupula de hormigon con oculo central.",
+    importance:
+      "Es una obra maestra para explicar cupula, hormigon romano, luz y espacio interior.",
+    premium: "Ficha de seccion, casetones, oculo y legado en la arquitectura posterior.",
+  },
+  {
+    name: "Pompeya",
+    period: "Roma",
+    date: "siglo I d. C.",
+    year: 79,
+    place: "Campania, Italia",
+    coords: [40.7462, 14.4989],
+    culture: "Roma antigua",
+    description:
+      "Ciudad preservada por la erupcion del Vesubio, con casas, calles, termas, tabernas, pinturas y vida urbana cotidiana.",
+    importance:
+      "Permite mostrar la arquitectura romana desde la escala domestica y no solo desde el monumento.",
+    premium: "Ruta por domus, foro, termas y tiendas como lectura de vida diaria.",
+  },
+  {
+    name: "Pont du Gard",
+    period: "Roma",
+    date: "c. siglo I d. C.",
+    year: 50,
+    place: "Occitania, Francia",
+    coords: [43.9475, 4.535],
+    culture: "Roma antigua",
+    description:
+      "Acueducto monumental de varios niveles que llevaba agua hacia Nemausus, actual Nimes.",
+    importance:
+      "Hace visible la arquitectura como infraestructura: ciudad, agua, ingenieria y territorio.",
+    premium: "Modulo de arcos, pendiente hidraulica y red de acueductos romanos.",
+  },
+];
+
+const periodColors = {
+  Neolitico: "#637047",
+  Egipto: "#c4943a",
+  Mesopotamia: "#a54f32",
+  Egeo: "#6c5f93",
+  Grecia: "#235a7a",
+  Roma: "#743623",
+};
+
+const videoCatalog = {
+  "Gobekli Tepe": "Los origenes del espacio ritual",
+  Stonehenge: "Megalitos, paisaje y astronomia",
+  "Pirámides de Guiza": "El poder de construir para la eternidad",
+  "Templo de Karnak": "El templo como ciudad sagrada",
+  Partenon: "El orden clasico y la Acropolis",
+  Coliseo: "Roma y la arquitectura del espectaculo",
+  "Panteon de Roma": "La cupula que cambio la historia",
+  Pompeya: "La ciudad cotidiana del mundo romano",
+};
+
+const historicalRegions = [
+  {
+    name: "Comunidades neoliticas de Anatolia",
+    startYear: -9600,
+    endYear: -6000,
+    color: "#637047",
+    coords: [
+      [39.6, 26.2],
+      [40.8, 39.5],
+      [34.8, 42.3],
+      [35.2, 28.1],
+    ],
+  },
+  {
+    name: "Megalitismo atlantico",
+    startYear: -4200,
+    endYear: -1800,
+    color: "#7d8458",
+    coords: [
+      [60.5, -10.5],
+      [59.8, 2.5],
+      [48.4, 1.6],
+      [44.2, -8.8],
+      [51.4, -11.5],
+    ],
+  },
+  {
+    name: "Egipto faraonico",
+    startYear: -3100,
+    endYear: -332,
+    color: "#c4943a",
+    coords: [
+      [31.8, 29.4],
+      [31.3, 33.7],
+      [22.0, 33.3],
+      [21.8, 29.7],
+    ],
+  },
+  {
+    name: "Ciudades sumerias",
+    startYear: -3500,
+    endYear: -1900,
+    color: "#a54f32",
+    coords: [
+      [33.5, 43.0],
+      [32.5, 47.4],
+      [29.6, 47.8],
+      [29.2, 44.0],
+    ],
+  },
+  {
+    name: "Babilonia",
+    startYear: -1894,
+    endYear: -539,
+    color: "#b9653f",
+    coords: [
+      [34.0, 42.5],
+      [33.6, 46.2],
+      [30.2, 47.6],
+      [29.6, 44.2],
+      [31.5, 42.0],
+    ],
+  },
+  {
+    name: "Mundo minoico",
+    startYear: -2000,
+    endYear: -1450,
+    color: "#6c5f93",
+    coords: [
+      [36.0, 23.4],
+      [36.1, 26.7],
+      [34.7, 27.1],
+      [34.5, 23.6],
+    ],
+  },
+  {
+    name: "Mundo micenico",
+    startYear: -1600,
+    endYear: -1100,
+    color: "#796aa4",
+    coords: [
+      [39.4, 20.2],
+      [39.5, 24.2],
+      [36.0, 24.0],
+      [35.7, 21.0],
+    ],
+  },
+  {
+    name: "Imperio persa aquemenida",
+    startYear: -550,
+    endYear: -330,
+    color: "#8f6c3a",
+    coords: [
+      [39.5, 26.0],
+      [41.0, 48.0],
+      [33.0, 61.0],
+      [24.5, 57.0],
+      [28.0, 44.0],
+      [31.2, 33.5],
+      [35.0, 29.0],
+    ],
+  },
+  {
+    name: "Grecia clasica",
+    startYear: -800,
+    endYear: -323,
+    color: "#235a7a",
+    coords: [
+      [40.8, 19.0],
+      [41.3, 25.0],
+      [36.0, 26.0],
+      [35.0, 21.0],
+      [37.2, 18.8],
+    ],
+  },
+  {
+    name: "Mundo helenistico",
+    startYear: -323,
+    endYear: -30,
+    color: "#2f789c",
+    coords: [
+      [41.0, 19.0],
+      [42.0, 45.0],
+      [34.0, 57.0],
+      [24.0, 50.0],
+      [29.0, 30.0],
+      [36.0, 18.0],
+    ],
+  },
+  {
+    name: "Republica e imperio romano",
+    startYear: -509,
+    endYear: 476,
+    color: "#743623",
+    coords: [
+      [55.5, -6.0],
+      [53.0, 2.0],
+      [50.0, 10.0],
+      [46.0, 30.0],
+      [41.0, 36.0],
+      [31.5, 34.8],
+      [29.0, 30.0],
+      [31.0, -8.5],
+      [37.0, -9.5],
+      [44.0, -4.0],
+    ],
+  },
+  {
+    name: "Partia",
+    startYear: -247,
+    endYear: 224,
+    color: "#7d5b35",
+    coords: [
+      [40.0, 45.0],
+      [38.0, 62.0],
+      [28.0, 61.0],
+      [26.5, 48.0],
+      [33.0, 43.5],
+    ],
+  },
+  {
+    name: "Persia sasanida",
+    startYear: 224,
+    endYear: 500,
+    color: "#9a6b2f",
+    coords: [
+      [40.0, 44.0],
+      [39.0, 62.0],
+      [27.0, 61.0],
+      [25.0, 50.0],
+      [31.0, 43.0],
+    ],
+  },
+  {
+    name: "Imperio romano de Oriente",
+    startYear: 330,
+    endYear: 500,
+    color: "#5d5f9a",
+    coords: [
+      [46.0, 18.0],
+      [44.0, 31.0],
+      [38.0, 36.0],
+      [31.5, 34.5],
+      [29.0, 30.0],
+      [36.0, 20.0],
+    ],
+  },
+  {
+    name: "Reinos posromanos occidentales",
+    startYear: 410,
+    endYear: 500,
+    color: "#8b5d4f",
+    coords: [
+      [52.5, -8.0],
+      [54.0, 14.0],
+      [47.0, 17.0],
+      [36.0, 3.0],
+      [37.0, -9.5],
+      [45.0, -6.0],
+    ],
+  },
+];
+
+const hasLeaflet = typeof L !== "undefined";
+const mapElement = document.querySelector("#map");
+let map = null;
+let fallbackLayer = null;
+let historicalLayerGroup = null;
+
+if (hasLeaflet) {
+  map = L.map("map", {
+    zoomControl: false,
+    minZoom: 3,
+    fadeAnimation: false,
+    closePopupOnClick: false,
+    worldCopyJump: false,
+    maxBounds: [
+      [-85, -180],
+      [85, 180],
+    ],
+    maxBoundsViscosity: 1,
+  }).setView([36, 24], 4);
+
+  L.control.zoom({ position: "bottomright" }).addTo(map);
+
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18,
+    noWrap: true,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+  historicalLayerGroup = L.layerGroup().addTo(map);
+} else {
+  mapElement.classList.add("fallback-map");
+  mapElement.innerHTML = `
+    <div class="fallback-copy">
+      <span>Vista local</span>
+      <strong>Mediterraneo, Europa y Cercano Oriente</strong>
+    </div>
+    <div class="fallback-layer" aria-label="Mapa visual de respaldo"></div>
+  `;
+  fallbackLayer = mapElement.querySelector(".fallback-layer");
+}
+
+const siteList = document.querySelector("#siteList");
+const resultCount = document.querySelector("#resultCount");
+const searchInput = document.querySelector("#searchInput");
+const videoOnlyToggle = document.querySelector("#videoOnlyToggle");
+const historicalLayerToggle = document.querySelector("#historicalLayerToggle");
+const yearRange = document.querySelector("#yearRange");
+const yearLabel = document.querySelector("#yearLabel");
+const historicalLegend = document.querySelector("#historicalLegend");
+const legendItems = document.querySelector("#legendItems");
+const filterButtons = [...document.querySelectorAll(".filter-button")];
+const detailPanel = document.querySelector("#detailPanel");
+const closeDetail = document.querySelector("#closeDetail");
+
+const detail = {
+  era: document.querySelector("#detailEra"),
+  title: document.querySelector("#detailTitle"),
+  meta: document.querySelector("#detailMeta"),
+  videoStatus: document.querySelector("#detailVideoStatus"),
+  description: document.querySelector("#detailDescription"),
+  importance: document.querySelector("#detailImportance"),
+  premium: document.querySelector("#detailPremium"),
+  image: document.querySelector("#detailImage"),
+};
+
+const fullFicha = {
+  shell: document.querySelector("#fullFicha"),
+  close: document.querySelector("#closeFullFicha"),
+  backdrop: document.querySelector("#closeFullBackdrop"),
+  era: document.querySelector("#fullFichaEra"),
+  title: document.querySelector("#fullFichaTitle"),
+  image: document.querySelector("#fullFichaImage"),
+  description: document.querySelector("#fullFichaDescription"),
+  importance: document.querySelector("#fullFichaImportance"),
+  video: document.querySelector("#fullFichaVideo"),
+  premium: document.querySelector("#fullFichaPremium"),
+};
+
+let activeFilter = "all";
+let videoOnly = false;
+let showHistoricalLayer = historicalLayerToggle.checked;
+let maxYear = Number(yearRange.value);
+let activeSite = null;
+const markers = new Map();
+
+function makeIcon(period) {
+  return L.divIcon({
+    className: "",
+    html: `<span class="marker-dot marker-${period}" style="background:${periodColors[period]}">${period[0]}</span>`,
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
+  });
+}
+
+function projectFallback([lat, lng]) {
+  const minLng = -12;
+  const maxLng = 48;
+  const minLat = 20;
+  const maxLat = 61;
+  const x = ((lng - minLng) / (maxLng - minLng)) * 100;
+  const y = (1 - (lat - minLat) / (maxLat - minLat)) * 100;
+  return {
+    left: `${Math.min(96, Math.max(4, x))}%`,
+    top: `${Math.min(92, Math.max(8, y))}%`,
+  };
+}
+
+function normalize(text) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function matches(site) {
+  const query = normalize(searchInput.value.trim());
+  const inFilter = activeFilter === "all" || site.period === activeFilter;
+  const inVideoFilter = !videoOnly || hasVideo(site);
+  const inYearFilter = site.year <= maxYear;
+  const haystack = normalize(`${site.name} ${site.place} ${site.culture} ${site.date} ${tagsFor(site).join(" ")}`);
+  return inFilter && inVideoFilter && inYearFilter && (!query || haystack.includes(query));
+}
+
+function formatYear(year) {
+  if (year < 0) return `${Math.abs(year).toLocaleString("es-CO")} a. C.`;
+  if (year === 0) return "0";
+  return `${year.toLocaleString("es-CO")} d. C.`;
+}
+
+function hasVideo(site) {
+  return Boolean(videoCatalog[site.name]);
+}
+
+function videoLabel(site) {
+  return hasVideo(site)
+    ? `Video: ${videoCatalog[site.name]}`
+    : "Aun no tiene video: buen candidato para futuro contenido";
+}
+
+function activeRegions() {
+  return historicalRegions.filter(
+    (region) => showHistoricalLayer && region.startYear <= maxYear && region.endYear >= maxYear,
+  );
+}
+
+function renderHistoricalRegions() {
+  const regions = activeRegions();
+  historicalLegend.classList.toggle("is-hidden", regions.length === 0);
+  legendItems.innerHTML = regions
+    .map(
+      (region) =>
+        `<span><i style="background:${region.color}"></i>${region.name}</span>`,
+    )
+    .join("");
+
+  if (!hasLeaflet) return;
+
+  historicalLayerGroup.clearLayers();
+  regions.forEach((region) => {
+    L.polygon(region.coords, {
+      color: region.color,
+      weight: 1,
+      fillColor: region.color,
+      fillOpacity: 0.08,
+      opacity: 0.55,
+      interactive: false,
+    })
+      .addTo(historicalLayerGroup);
+  });
+
+  historicalLayerGroup.eachLayer((layer) => layer.bringToBack());
+}
+
+function tagsFor(site) {
+  const tagsByPeriod = {
+    Neolitico: ["ritual", "megalitico", "aldea"],
+    Egipto: ["monumento", "templo", "funerario"],
+    Mesopotamia: ["ciudad", "templo", "poder"],
+    Egeo: ["palacio", "fortaleza", "mediterraneo"],
+    Grecia: ["orden-clasico", "polis", "templo"],
+    Roma: ["ingenieria", "ciudad", "imperio"],
+  };
+  return tagsByPeriod[site.period] || [];
+}
+
+function imageLabel(site) {
+  return site.image ? "" : "Foto pendiente";
+}
+
+function imageBackground(site) {
+  if (site.image) {
+    return `background-image: url('${site.image}')`;
+  }
+
+  const backgrounds = {
+    Neolitico: "linear-gradient(135deg, #6f7d58, #d7c8a2)",
+    Egipto: "linear-gradient(135deg, #c4943a, #efe0b6)",
+    Mesopotamia: "linear-gradient(135deg, #a54f32, #e1b47f)",
+    Egeo: "linear-gradient(135deg, #6c5f93, #c8c0df)",
+    Grecia: "linear-gradient(135deg, #235a7a, #b9d8e6)",
+    Roma: "linear-gradient(135deg, #743623, #d6a073)",
+  };
+
+  return `background-image: ${backgrounds[site.period]}`;
+}
+
+function selectSite(site, shouldZoom = true) {
+  activeSite = site;
+  detailPanel.classList.remove("is-hidden");
+  detail.era.textContent = `${site.period} | ${site.date}`;
+  detail.title.textContent = site.name;
+  detail.meta.textContent = `${site.place} | ${site.culture}`;
+  detail.videoStatus.textContent = videoLabel(site);
+  detail.videoStatus.classList.toggle("has-video", hasVideo(site));
+  detail.description.textContent = site.description;
+  detail.importance.textContent = site.importance;
+  detail.premium.textContent = site.premium;
+  detail.image.style = imageBackground(site);
+  detail.image.textContent = imageLabel(site);
+
+  document.querySelectorAll(".site-card").forEach((card) => {
+    card.classList.toggle("active", card.dataset.site === site.name);
+  });
+
+  if (shouldZoom) {
+    if (hasLeaflet) {
+      map.flyTo(site.coords, Math.max(map.getZoom(), 6), { duration: 0.75 });
+    }
+  }
+}
+
+function openFullFicha() {
+  if (!activeSite) return;
+
+  fullFicha.shell.classList.remove("is-hidden");
+  fullFicha.era.textContent = `${activeSite.period} | ${activeSite.date}`;
+  fullFicha.title.textContent = activeSite.name;
+  fullFicha.image.style = imageBackground(activeSite);
+  fullFicha.image.textContent = imageLabel(activeSite);
+  fullFicha.description.textContent = activeSite.description;
+  fullFicha.importance.textContent = activeSite.importance;
+  fullFicha.video.textContent = videoLabel(activeSite);
+  fullFicha.premium.textContent = activeSite.premium;
+}
+
+function closeFullFicha() {
+  fullFicha.shell.classList.add("is-hidden");
+}
+
+function render() {
+  const filtered = sites.filter(matches);
+  siteList.innerHTML = "";
+  resultCount.textContent = filtered.length;
+  renderHistoricalRegions();
+
+  markers.forEach((marker, name) => {
+    const site = sites.find((item) => item.name === name);
+    if (site && matches(site)) {
+      if (hasLeaflet) {
+        marker.addTo(map);
+      } else {
+        marker.hidden = false;
+      }
+    } else {
+      if (hasLeaflet) {
+        marker.remove();
+      } else {
+        marker.hidden = true;
+      }
+    }
+  });
+
+  filtered.forEach((site) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "site-card";
+    card.dataset.site = site.name;
+    card.innerHTML = `
+      <span class="site-thumb" style="${imageBackground(site)}">${imageLabel(site)}</span>
+      <span class="site-copy">
+        <strong>${site.name}</strong>
+        <span>${site.date} | ${site.place}</span>
+        <small>${tagsFor(site).map((tag) => `#${tag}`).join(" ")} ${hasVideo(site) ? "#video" : "#sin-video"}</small>
+      </span>
+    `;
+    card.addEventListener("click", () => selectSite(site));
+    siteList.append(card);
+  });
+
+  if (filtered.length > 0) {
+    if (hasLeaflet) {
+      const bounds = L.latLngBounds(filtered.map((site) => site.coords));
+      map.fitBounds(bounds, { padding: [48, 48], maxZoom: 5 });
+    }
+  }
+}
+
+sites.forEach((site) => {
+  let marker;
+  if (hasLeaflet) {
+    marker = L.marker(site.coords, { icon: makeIcon(site.period) });
+    marker.bindTooltip(site.name, { direction: "top", offset: [0, -10] });
+    marker.bindPopup(`<strong>${site.name}</strong><br>${site.date}<br>${videoLabel(site)}`, {
+      autoClose: true,
+      closeButton: false,
+      closeOnClick: false,
+      keepInView: true,
+    });
+    marker.on("click", () => {
+      selectSite(site, false);
+      marker.openPopup();
+    });
+  } else {
+    marker = document.createElement("button");
+    const position = projectFallback(site.coords);
+    marker.type = "button";
+    marker.className = `fallback-marker marker-${site.period}`;
+    marker.style.left = position.left;
+    marker.style.top = position.top;
+    marker.textContent = site.period[0];
+    marker.title = site.name;
+    marker.addEventListener("click", () => selectSite(site, false));
+    fallbackLayer.append(marker);
+  }
+  markers.set(site.name, marker);
+});
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter;
+    filterButtons.forEach((item) => item.classList.toggle("active", item === button));
+    render();
+  });
+});
+
+searchInput.addEventListener("input", render);
+
+videoOnlyToggle.addEventListener("change", () => {
+  videoOnly = videoOnlyToggle.checked;
+  render();
+});
+
+historicalLayerToggle.addEventListener("change", () => {
+  showHistoricalLayer = historicalLayerToggle.checked;
+  render();
+});
+
+yearRange.addEventListener("input", () => {
+  maxYear = Number(yearRange.value);
+  yearLabel.textContent = formatYear(maxYear);
+  render();
+});
+
+closeDetail.addEventListener("click", () => {
+  detailPanel.classList.add("is-hidden");
+});
+
+document.querySelector("#openFullFicha").addEventListener("click", openFullFicha);
+fullFicha.close.addEventListener("click", closeFullFicha);
+fullFicha.backdrop.addEventListener("click", closeFullFicha);
+
+render();
